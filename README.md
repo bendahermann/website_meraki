@@ -1,36 +1,72 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# TITAN ATHLETICS — Plataforma Modular para Entrenadores y Creadores Fitness
 
-## Getting Started
+Esta plataforma fue desarrollada bajo una **arquitectura modular "marca blanca" (white-label)** lista para escalarse y replicarse para múltiples entrenadores, gimnasios o nutriólogos en México.
 
-First, run the development server:
+---
+
+## 🚀 Cómo Iniciar el Proyecto Localmente
 
 ```bash
+cd website
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
+Abre en tu navegador: [http://localhost:3000](http://localhost:3000)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🛠️ Arquitectura Modular (Conecta y Desconecta Módulos)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Todo el comportamiento de la plataforma se controla desde un solo archivo:  
+📁 `src/config/site.ts`
 
-## Learn More
+```typescript
+export const siteConfig = {
+  name: "TITAN ATHLETICS",
+  trainerName: "Hermann Benda",
+  currency: { code: "MXN", symbol: "$" },
+  // INTERRUPTORES DE FUNCIONALIDADES
+  features: {
+    store: true,        // Tienda de ropa y merchandising físico
+    courses: true,      // Cursos en video y academia de alumnos
+    coaching: true,     // Asesorías personalizadas 1 a 1 (WhatsApp)
+    cart: true,         // Carrito de compras unificado
+    auth: true,         // Inicio de sesión y tracking de lecciones
+    testimonials: true, // Casos de éxito y transformaciones
+    newsletter: true,   // Descarga de guía en PDF (captación de correos)
+    admin: true,        // Panel de control
+  }
+};
+```
+*Si cambias `store: false`, la tienda y todos sus botones desaparecerán de la web sin romper nada.*
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 📦 Rutas y Funcionalidades Incluidas
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+| Ruta | Descripción |
+| :--- | :--- |
+| `/` | **Landing Page de Alto Impacto:** Hero, métricas, cursos, ropa, bio del coach, testimonios y lead magnet. |
+| `/cursos` | **Catálogo de Cursos:** Filtros por nivel (Principiante, Intermedio, Avanzado) e inscripción. |
+| `/tienda` | **E-commerce de Ropa:** Ropa deportiva, hoodies, shakers, selector de tallas y carrito reactivo. |
+| `/checkout` | **Pasarela de Pago Unificada:** Permite comprar ropa (con envío en México) y cursos en una sola orden. |
+| `/academia` | **Área de Alumnos (LMS):** Dashboard personal, barra de porcentaje de progreso y acceso a cursos. |
+| `/academia/curso/[slug]` | **Reproductor Protegido:** Videos protegidos contra clic derecho, sin botón de descarga y con marca de agua dinámica con el correo del alumno. |
+| `/login` | **Autenticación con 1 Clic:** Acceso rápido demo como Alumno o como Administrador. |
+| `/admin` | **Panel de Control:** KPIs de ventas en MXN, pedidos pendientes, gestión de cursos y control de interruptores modulares. |
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 🛡️ Medidas de Protección de Video
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. **Bloqueo de Clic Derecho:** Se desactiva la opción de inspeccionar o guardar el video.
+2. **Atributo `nodownload`:** Se elimina el botón de descarga del reproductor nativo.
+3. **Marca de Agua Dinámica:** Se estampa el correo electrónico del alumno en pantalla, disuadiendo la grabación de pantalla para piratería.
+4. **Verificación de Compra:** Solo alumnos con la compra registrada tienen acceso al reproductor.
+
+---
+
+## 💳 Despliegue en Producción (Costo \$0 inicial)
+
+1. Sube este repositorio a **GitHub**.
+2. Conéctalo a **Vercel** (despliegue gratuito en 1 clic).
+3. Conecta **Stripe México** o **Mercado Pago** para cobros automáticos.
