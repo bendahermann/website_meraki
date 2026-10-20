@@ -40,7 +40,7 @@ export const siteConfig: SiteConfig = {
   shortName: "TitanFit",
   trainerName: "Hermann Benda",
   trainerTitle: "Especialista en Hipertrofia & Rendimiento Deportivo",
-  description: "Entrena con metodología científica, rompe tus límites y transforma tu físico con programas estructurados paso a paso.",
+  description: "Entrena con metodología científica, rompe tus límites y transforma tu físico con programas estructurados paso a paso !",
   currency: {
     code: "MXN",
     symbol: "$",
