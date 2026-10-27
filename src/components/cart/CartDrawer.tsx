@@ -17,7 +17,6 @@ export function CartDrawer() {
     shippingCost,
     total,
     hasPhysicalItems,
-    hasCourseItems,
   } = useCart();
 
   if (!isOpen) return null;
@@ -55,8 +54,8 @@ export function CartDrawer() {
               <Truck className="w-4 h-4 shrink-0" />
               <span>
                 {subtotal >= 999
-                  ? "¡Felicidades! Tienes Envío Gratis en todo México."
-                  : `Agrega ${siteConfig.currency.symbol}${999 - subtotal} más en ropa para obtener Envío Gratis.`}
+                  ? "¡Felicidades! Tienes Envío Gratis en tu compra."
+                  : `Agrega ${siteConfig.currency.symbol}${999 - subtotal} más en productos para obtener Envío Gratis.`}
               </span>
             </div>
           )}
@@ -71,7 +70,7 @@ export function CartDrawer() {
                 <div>
                   <p className="text-base font-semibold text-zinc-200">Tu carrito está vacío</p>
                   <p className="text-sm text-zinc-500 mt-1">
-                    Explora nuestros cursos de entrenamiento o la colección oficial.
+                    Explora nuestro catálogo y productos disponibles.
                   </p>
                 </div>
                 <button
@@ -109,13 +108,13 @@ export function CartDrawer() {
 
                       {item.type === "course" ? (
                         <span className="inline-flex items-center gap-1 mt-1 text-[11px] font-medium text-amber-400 bg-amber-400/10 px-2 py-0.5 rounded">
-                          <Sparkles className="w-3 h-3" /> Curso Digital (Acceso Inmediato)
+                          <Sparkles className="w-3 h-3" /> Producto Digital (Acceso Inmediato)
                         </span>
                       ) : (
                         <div className="flex items-center gap-2 mt-1 text-xs text-zinc-400">
                           {item.selectedSize && (
                             <span className="bg-zinc-800 px-1.5 py-0.5 rounded text-[11px] font-medium text-zinc-300">
-                              Talla: {item.selectedSize}
+                              Opción: {item.selectedSize}
                             </span>
                           )}
                           {item.selectedColor && (
@@ -153,7 +152,7 @@ export function CartDrawer() {
                           </button>
                         </div>
                       ) : (
-                        <span className="text-xs text-zinc-500">1 licencia</span>
+                        <span className="text-xs text-zinc-500">1 acceso</span>
                       )}
                     </div>
                   </div>
@@ -176,7 +175,7 @@ export function CartDrawer() {
 
                 {hasPhysicalItems && (
                   <div className="flex justify-between text-zinc-400">
-                    <span>Costo de Envío (México)</span>
+                    <span>Costo de Envío Estimado</span>
                     <span className="text-zinc-200 font-medium">
                       {shippingCost === 0 ? (
                         <span className="text-emerald-400 font-semibold uppercase text-xs">GRATIS</span>
@@ -207,7 +206,7 @@ export function CartDrawer() {
 
               <div className="flex items-center justify-center gap-2 text-[11px] text-zinc-500 text-center">
                 <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
-                <span>Pago protegido con Stripe & Mercado Pago México</span>
+                <span>Pago 100% seguro y encriptado</span>
               </div>
             </div>
           )}

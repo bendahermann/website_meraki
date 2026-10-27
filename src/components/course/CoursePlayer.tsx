@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Course } from "@/types";
+import { siteConfig } from "@/config/site";
 import { useAuth } from "@/context/AuthContext";
 import {
   Play,
@@ -135,7 +136,7 @@ export function CoursePlayer({ course }: CoursePlayerProps) {
 
             {/* Marca de Agua Dinámica Antipiratería */}
             <div className="absolute top-4 right-4 pointer-events-none opacity-40 hover:opacity-60 transition-opacity bg-black/60 px-3 py-1 rounded-lg backdrop-blur-sm border border-white/10 text-[10px] text-zinc-300 font-mono">
-              Titan Athletics • Alumno: {user?.email}
+              {siteConfig.name} • Usuario: {user?.email}
             </div>
           </div>
 

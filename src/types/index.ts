@@ -1,11 +1,11 @@
-export type ProductCategory = "apparel" | "equipment" | "supplement" | "course";
+export type ProductCategory = "general" | "destacados" | "accesorios" | "digital";
 
 export interface Lesson {
   id: string;
   title: string;
   duration: string; // ej. "14:20"
   description?: string;
-  videoUrl: string; // Enlace privado/token de Bunny.net, Vimeo o Cloudflare
+  videoUrl: string; // Enlace de video (Bunny.net, Vimeo, Cloudflare, etc.)
   isCompleted?: boolean;
   notes?: string;
 }
@@ -23,16 +23,16 @@ export interface Course {
   title: string;
   subtitle: string;
   description: string;
-  price: number; // en MXN
-  compareAtPrice?: number; // Precio anterior tachado
+  price: number; // en moneda local (ej. MXN)
+  compareAtPrice?: number; // Precio tachado
   thumbnail: string;
-  badge?: string; // ej. "Más Vendido", "Principiantes", "Avanzado"
+  badge?: string; // ej. "Más Vendido", "Nuevo", "Destacado"
   level: "Principiante" | "Intermedio" | "Avanzado" | "Todos los niveles";
   durationWeeks: number;
   totalHours: string;
   totalLessons: number;
-  includesDietPlan: boolean;
-  includesCommunity: boolean;
+  includesCertificate?: boolean;
+  includesCommunity?: boolean;
   modules: CourseModule[];
   whatYouWillLearn: string[];
   requirements: string[];
@@ -43,19 +43,19 @@ export interface PhysicalProduct {
   slug: string;
   title: string;
   description: string;
-  price: number; // en MXN
+  price: number;
   compareAtPrice?: number;
-  category: "apparel" | "equipment" | "supplement";
+  category: string;
   images: string[];
-  badge?: string; // ej. "Edición Limitada", "Top Ventas"
-  sizes?: string[]; // ej. ["CH", "M", "G", "XG"]
+  badge?: string;
+  sizes?: string[];
   colors?: string[];
   stock: number;
   featured: boolean;
 }
 
 export interface CartItem {
-  id: string; // Para ropa: `${productId}-${selectedSize}`
+  id: string;
   productId: string;
   type: "course" | "physical";
   title: string;
@@ -79,7 +79,7 @@ export interface User {
   avatarUrl?: string;
   role: "student" | "admin";
   purchasedCourseIds: string[];
-  progress: Record<string, UserProgress>; // courseId -> UserProgress
+  progress: Record<string, UserProgress>;
 }
 
 export interface Order {

@@ -4,20 +4,18 @@ import React, { useState } from "react";
 import { MOCK_PRODUCTS } from "@/data/mockData";
 import { siteConfig } from "@/config/site";
 import { useCart } from "@/context/CartContext";
-import { ShoppingBag, Filter, Truck } from "lucide-react";
+import { ShoppingBag, Truck } from "lucide-react";
 
 export default function StorePage() {
   const { addItem } = useCart();
   const [selectedCategory, setSelectedCategory] = useState<string>("todos");
-  const [selectedSizes, setSelectedSizes] = useState<Record<string, string>>({
-    "prod-playera-oversize-black": "M",
-    "prod-hoodie-heavy-acid": "G",
-  });
+  const [selectedSizes, setSelectedSizes] = useState<Record<string, string>>({});
 
   const categories = [
-    { id: "todos", label: "Todo" },
-    { id: "apparel", label: "Ropa & Playeras" },
-    { id: "equipment", label: "Accesorios & Shakers" },
+    { id: "todos", label: "Todos los Productos" },
+    { id: "destacados", label: "Destacados" },
+    { id: "accesorios", label: "Accesorios" },
+    { id: "general", label: "Colección General" },
   ];
 
   const filteredProducts = MOCK_PRODUCTS.filter((prod) => {
@@ -35,13 +33,13 @@ export default function StorePage() {
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-12 space-y-4">
           <span className="text-xs font-black uppercase tracking-widest text-amber-400">
-            Colección Oficial
+            Catálogo Oficial
           </span>
           <h1 className="text-4xl sm:text-5xl font-black uppercase tracking-tight text-white">
-            Ropa & Equipo de Entrenamiento
+            Productos & Colecciones
           </h1>
           <p className="text-zinc-400 text-sm sm:text-base">
-            Prendas confeccionadas con corte boxy fit en México. Envío gratis a todo el país en pedidos a partir de $999 MXN.
+            Artículos seleccionados con los más altos estándares de calidad y durabilidad. Envíos disponibles a toda la República.
           </p>
 
           {/* Categorías */}
@@ -98,7 +96,7 @@ export default function StorePage() {
                     {product.sizes && product.sizes.length > 0 && (
                       <div className="space-y-1.5 pt-2">
                         <span className="text-[11px] font-bold text-zinc-400 uppercase tracking-wider block">
-                          Talla: {currentSize}
+                          Opción: {currentSize}
                         </span>
                         <div className="flex gap-2">
                           {product.sizes.map((size) => (
@@ -106,7 +104,7 @@ export default function StorePage() {
                               key={size}
                               type="button"
                               onClick={() => handleSizeChange(product.id, size)}
-                              className={`w-9 h-9 rounded-lg text-xs font-bold transition-all border ${
+                              className={`px-3 py-1 rounded-lg text-xs font-bold transition-all border ${
                                 currentSize === size
                                   ? "bg-amber-400 text-zinc-950 border-amber-400 shadow-md"
                                   : "bg-zinc-950 text-zinc-300 border-zinc-800 hover:border-zinc-700"
@@ -144,7 +142,7 @@ export default function StorePage() {
                     <button
                       onClick={() =>
                         addItem({
-                          id: `${product.id}-${currentSize}`,
+                          id: currentSize ? `${product.id}-${currentSize}` : product.id,
                           productId: product.id,
                           type: "physical",
                           title: product.title,

@@ -1,12 +1,15 @@
 {
-  "name": "website",
-  "version": "0.1.0",
+  "name": "website-base-template",
+  "version": "1.0.0",
   "private": true,
+  "description": "Plantilla base modular y moderna para sitios web y e-commerce con Next.js y Tailwind CSS",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "type-check": "tsc --noEmit",
+    "setup": "node scripts/setup.js"
   },
   "dependencies": {
     "clsx": "^2.1.1",

@@ -155,10 +155,10 @@ export default function AdminDashboardPage() {
                   </thead>
                   <tbody className="divide-y divide-zinc-800/60 text-zinc-300">
                     {[
-                      { id: "ORD-92810", name: "Esteban R.", type: "Curso Hipertrofia", amount: "$1,299 MXN", status: "Completado", date: "Hoy, 18:20" },
-                      { id: "ORD-92809", name: "Valeria M.", type: "Playera Oversize (M)", amount: "$549 MXN", status: "Por Enviar", date: "Hoy, 15:45" },
-                      { id: "ORD-92808", name: "Héctor G.", type: "Curso Definición + Shaker", amount: "$1,379 MXN", status: "Completado", date: "Ayer" },
-                      { id: "ORD-92807", name: "Rodrigo L.", type: "Hoodie Acid Wash (G)", amount: "$980 MXN", status: "Enviado", date: "Ayer" },
+                      { id: "ORD-92810", name: "Esteban R.", type: "Programa Estrategia", amount: "$999 MXN", status: "Completado", date: "Hoy, 18:20" },
+                      { id: "ORD-92809", name: "Valeria M.", type: "Serie Minimal (M)", amount: "$499 MXN", status: "Por Enviar", date: "Hoy, 15:45" },
+                      { id: "ORD-92808", name: "Héctor G.", type: "Curso UX + Accesorio", amount: "$1,148 MXN", status: "Completado", date: "Ayer" },
+                      { id: "ORD-92807", name: "Rodrigo L.", type: "Pieza Selecta", amount: "$349 MXN", status: "Enviado", date: "Ayer" },
                     ].map((row) => (
                       <tr key={row.id} className="hover:bg-zinc-800/40 transition-colors">
                         <td className="py-3 font-mono text-zinc-400">{row.id}</td>
@@ -204,13 +204,13 @@ export default function AdminDashboardPage() {
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-4">
                 {[
-                  { key: "store", label: "Tienda de Ropa & Merch Físico", desc: "Habilita el catálogo de ropa, selector de tallas y envíos." },
-                  { key: "courses", label: "Academia de Cursos & Lecciones (LMS)", desc: "Venta de cursos en video y reproductor con protección." },
-                  { key: "coaching", label: "Módulo de Asesorías 1 a 1", desc: "Botón directo de cotización por WhatsApp del entrenador." },
-                  { key: "cart", label: "Carrito de Compras Global", desc: "Permite comprar ropa y cursos en un mismo checkout." },
-                  { key: "auth", label: "Autenticación & Área de Miembros", desc: "Sistema de login para alumnos y tracking de avance." },
-                  { key: "testimonials", label: "Casos de Éxito / Testimonios", desc: "Muestra métricas reales de transformación física." },
-                  { key: "newsletter", label: "Lead Magnet (Guía Gratuita)", desc: "Captador de correos con entrega de PDF automatizada." },
+                  { key: "store", label: "Catálogo de Productos Físicos (E-Commerce)", desc: "Habilita la tienda, variantes, stock y logística de envíos." },
+                  { key: "courses", label: "Academia Digital & Lecciones (LMS)", desc: "Venta de cursos en video y reproductor con protección." },
+                  { key: "services", label: "Módulo de Asesorías & Servicios 1 a 1", desc: "Botón directo de cotización y contacto por WhatsApp." },
+                  { key: "cart", label: "Carrito de Compras Unificado", desc: "Permite comprar productos físicos y digitales en un mismo checkout." },
+                  { key: "auth", label: "Autenticación & Área de Miembros", desc: "Sistema de login para usuarios y seguimiento de progreso." },
+                  { key: "testimonials", label: "Testimonios & Reseñas", desc: "Muestra opiniones reales y calificaciones de clientes." },
+                  { key: "newsletter", label: "Lead Magnet & Newsletter", desc: "Captador de correos y entrega de recursos automatizada." },
                 ].map((item) => {
                   const isEnabled = features[item.key as keyof typeof features];
 

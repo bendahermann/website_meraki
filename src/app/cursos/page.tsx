@@ -26,13 +26,13 @@ export default function CoursesPage() {
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-12 space-y-4">
           <span className="text-xs font-black uppercase tracking-widest text-amber-400">
-            Academia Digital
+            Formación Digital
           </span>
           <h1 className="text-4xl sm:text-5xl font-black uppercase tracking-tight text-white">
-            Programas & Cursos de Entrenamiento
+            Cursos & Programas Especializados
           </h1>
           <p className="text-zinc-400 text-sm sm:text-base">
-            Metodologías estructuradas con videos explicativos, técnicas de sobrecarga y soporte para que alcances tus metas.
+            Metodologías estructuradas con lecciones en video de alta calidad, recursos prácticos y soporte continuo.
           </p>
 
           {/* Filtros de nivel */}

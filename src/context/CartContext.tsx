@@ -30,7 +30,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     setMounted(true);
     try {
-      const saved = localStorage.getItem("titan_cart");
+      const saved = localStorage.getItem("app_cart");
       if (saved) {
         setItems(JSON.parse(saved));
       }
@@ -43,7 +43,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     if (!mounted) return;
     try {
-      localStorage.setItem("titan_cart", JSON.stringify(items));
+      localStorage.setItem("app_cart", JSON.stringify(items));
     } catch {
       // Ignorar error
     }

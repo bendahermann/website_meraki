@@ -10,7 +10,7 @@ import {
   User as UserIcon,
   Menu,
   X,
-  Dumbbell,
+  Sparkles,
   BookOpen,
   Shield,
   LogOut,
@@ -36,14 +36,14 @@ export function Navbar() {
           {/* Logo / Marca */}
           <Link href="/" className="flex items-center gap-3 group">
             <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-amber-500 to-amber-300 flex items-center justify-center text-zinc-950 shadow-lg shadow-amber-500/20 group-hover:scale-105 transition-transform">
-              <Dumbbell className="w-6 h-6 stroke-[2.5]" />
+              <Sparkles className="w-5 h-5 stroke-[2.5]" />
             </div>
             <div>
               <span className="text-xl font-black tracking-tight text-white uppercase block leading-none">
                 {siteConfig.name}
               </span>
-              <span className="text-[10px] uppercase font-bold tracking-widest text-amber-400 block mt-1">
-                {siteConfig.trainerName}
+              <span className="text-[10px] uppercase font-bold tracking-widest text-amber-400 block mt-1 truncate max-w-[180px]">
+                {siteConfig.tagline}
               </span>
             </div>
           </Link>
@@ -110,14 +110,16 @@ export function Navbar() {
                           <p className="text-zinc-500 truncate">{user.email}</p>
                         </div>
 
-                        <Link
-                          href="/academia"
-                          onClick={() => setUserDropdownOpen(false)}
-                          className="flex items-center gap-2.5 px-4 py-2.5 text-xs text-zinc-200 hover:bg-zinc-800 hover:text-amber-400 font-medium transition-colors"
-                        >
-                          <BookOpen className="w-4 h-4 text-amber-400" />
-                          <span>Mis Cursos Activos</span>
-                        </Link>
+                        {siteConfig.features.courses && (
+                          <Link
+                            href="/academia"
+                            onClick={() => setUserDropdownOpen(false)}
+                            className="flex items-center gap-2.5 px-4 py-2.5 text-xs text-zinc-200 hover:bg-zinc-800 hover:text-amber-400 font-medium transition-colors"
+                          >
+                            <BookOpen className="w-4 h-4 text-amber-400" />
+                            <span>Mis Contenidos & Cursos</span>
+                          </Link>
+                        )}
 
                         {siteConfig.features.admin && (
                           <Link
@@ -184,13 +186,15 @@ export function Navbar() {
           ))}
           {user && (
             <div className="pt-3 border-t border-zinc-800 space-y-2">
-              <Link
-                href="/academia"
-                onClick={() => setMobileMenuOpen(false)}
-                className="flex items-center gap-2 text-sm font-bold text-amber-400"
-              >
-                <BookOpen className="w-4 h-4" /> Mis Cursos de Alumno
-              </Link>
+              {siteConfig.features.courses && (
+                <Link
+                  href="/academia"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="flex items-center gap-2 text-sm font-bold text-amber-400"
+                >
+                  <BookOpen className="w-4 h-4" /> Mis Contenidos
+                </Link>
+              )}
               {siteConfig.features.admin && (
                 <Link
                   href="/admin"

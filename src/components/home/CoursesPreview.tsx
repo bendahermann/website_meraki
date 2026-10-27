@@ -21,13 +21,13 @@ export function CoursesPreview() {
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-14 gap-4">
           <div className="space-y-3">
             <span className="text-xs font-black uppercase tracking-widest text-amber-400">
-              Metodología Comprobada
+              Formación & Crecimiento
             </span>
             <h2 className="text-3xl sm:text-4xl font-black uppercase tracking-tight text-white">
-              Programas & Cursos en Video
+              Cursos & Programas Digitales
             </h2>
             <p className="text-sm sm:text-base text-zinc-400 max-w-xl">
-              Aprende a tu propio ritmo con lecciones de video en alta definición, rutinas descargables en PDF y guías nutricionales.
+              Aprende a tu propio ritmo con lecciones prácticas en video, recursos descargables y contenido actualizado.
             </p>
           </div>
           <Link
@@ -60,41 +60,37 @@ export function CoursesPreview() {
                     <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/80 via-transparent to-transparent" />
 
                     {course.badge && (
-                      <span className="absolute top-4 left-4 px-3 py-1 rounded-full bg-amber-400 text-zinc-950 text-[11px] font-black uppercase tracking-wider shadow-md">
+                      <span className="absolute top-4 left-4 px-3 py-1 rounded-full bg-amber-400 text-zinc-950 text-xs font-black uppercase tracking-wider">
                         {course.badge}
                       </span>
                     )}
 
-                    <span className="absolute bottom-3 right-3 px-2.5 py-1 rounded-lg bg-black/70 backdrop-blur-md text-[11px] font-semibold text-zinc-300 flex items-center gap-1.5">
+                    <span className="absolute bottom-3 right-3 text-xs bg-black/70 backdrop-blur-md px-2.5 py-1 rounded-lg text-zinc-300 flex items-center gap-1.5 font-medium">
                       <Clock className="w-3.5 h-3.5 text-amber-400" />
-                      {course.durationWeeks} semanas
+                      {course.totalHours}
                     </span>
                   </div>
 
-                  {/* Info del Curso */}
+                  {/* Contenido */}
                   <div className="p-6 space-y-4">
-                    <div className="flex items-center gap-2 text-xs text-zinc-400">
-                      <span className="text-amber-400 font-semibold">{course.level}</span>
-                      <span>•</span>
-                      <span className="flex items-center gap-1">
-                        <BookOpen className="w-3.5 h-3.5" />
-                        {course.totalLessons} lecciones
-                      </span>
+                    <div className="space-y-1.5">
+                      <div className="flex items-center justify-between text-xs text-zinc-400 font-semibold">
+                        <span>{course.level}</span>
+                        <span>{course.totalLessons} Lecciones</span>
+                      </div>
+                      <h3 className="text-xl font-black text-white group-hover:text-amber-400 transition-colors line-clamp-2">
+                        {course.title}
+                      </h3>
+                      <p className="text-xs text-zinc-400 line-clamp-2">
+                        {course.subtitle}
+                      </p>
                     </div>
 
-                    <h3 className="text-xl font-black text-white group-hover:text-amber-400 transition-colors line-clamp-1">
-                      {course.title}
-                    </h3>
-
-                    <p className="text-xs sm:text-sm text-zinc-400 line-clamp-2 leading-relaxed">
-                      {course.subtitle}
-                    </p>
-
-                    {/* Puntos destacados */}
+                    {/* Lo que aprenderás */}
                     <div className="space-y-1.5 pt-2 border-t border-zinc-800/80">
                       {course.whatYouWillLearn.slice(0, 2).map((item, idx) => (
-                        <div key={idx} className="flex items-start gap-2 text-xs text-zinc-300">
-                          <Check className="w-3.5 h-3.5 text-amber-400 shrink-0 mt-0.5" />
+                        <div key={idx} className="flex items-center gap-2 text-xs text-zinc-300">
+                          <Check className="w-3.5 h-3.5 text-amber-400 shrink-0" />
                           <span className="line-clamp-1">{item}</span>
                         </div>
                       ))}
@@ -102,13 +98,10 @@ export function CoursesPreview() {
                   </div>
                 </div>
 
-                {/* Precio y Botón */}
-                <div className="p-6 pt-0 mt-2">
-                  <div className="pt-4 border-t border-zinc-800 flex items-center justify-between">
+                {/* Footer de Tarjeta con Precios y CTA */}
+                <div className="p-6 pt-0">
+                  <div className="flex items-center justify-between pt-4 border-t border-zinc-800">
                     <div>
-                      <span className="text-[11px] uppercase tracking-wider text-zinc-500 block">
-                        Inversión Única
-                      </span>
                       <div className="flex items-baseline gap-2">
                         <span className="text-2xl font-black text-white">
                           {siteConfig.currency.symbol}
@@ -121,15 +114,18 @@ export function CoursesPreview() {
                           </span>
                         )}
                       </div>
+                      <span className="text-[10px] text-zinc-500 font-bold uppercase tracking-wider block">
+                        Acceso Permanente
+                      </span>
                     </div>
 
                     {isOwned ? (
                       <Link
                         href={`/academia/curso/${course.slug}`}
-                        className="px-4 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-zinc-950 font-bold text-xs uppercase tracking-wider transition-colors flex items-center gap-1.5"
+                        className="px-4 py-2.5 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 font-bold text-xs hover:bg-emerald-500/20 transition-colors flex items-center gap-1.5"
                       >
                         <PlayCircle className="w-4 h-4" />
-                        <span>Continuar</span>
+                        <span>Ver Curso</span>
                       </Link>
                     ) : (
                       <button
@@ -143,10 +139,9 @@ export function CoursesPreview() {
                             image: course.thumbnail,
                           })
                         }
-                        className="px-4 py-2.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-zinc-950 font-black text-xs uppercase tracking-wider transition-colors shadow-lg shadow-amber-400/20 active:scale-95 flex items-center gap-1.5"
+                        className="px-4 py-2.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-zinc-950 font-black text-xs uppercase tracking-wider transition-colors shadow-md shadow-amber-400/20"
                       >
-                        <Sparkles className="w-3.5 h-3.5" />
-                        <span>Inscribirme</span>
+                        Inscribirme
                       </button>
                     )}
                   </div>

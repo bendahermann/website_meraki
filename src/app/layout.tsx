@@ -19,7 +19,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: `${siteConfig.name} | ${siteConfig.trainerName} - Programas & Tienda Oficial`,
+  title: `${siteConfig.name} | ${siteConfig.tagline}`,
   description: siteConfig.description,
 };
 

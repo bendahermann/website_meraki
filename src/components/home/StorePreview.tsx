@@ -9,10 +9,7 @@ import { ShoppingBag, ArrowRight, Check } from "lucide-react";
 
 export function StorePreview() {
   const { addItem } = useCart();
-  const [selectedSizes, setSelectedSizes] = useState<Record<string, string>>({
-    "prod-playera-oversize-black": "M",
-    "prod-hoodie-heavy-acid": "G",
-  });
+  const [selectedSizes, setSelectedSizes] = useState<Record<string, string>>({});
 
   if (!siteConfig.features.store) return null;
 
@@ -27,13 +24,13 @@ export function StorePreview() {
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-14 gap-4">
           <div className="space-y-3">
             <span className="text-xs font-black uppercase tracking-widest text-amber-400">
-              Colección Oficial
+              Catálogo Oficial
             </span>
             <h2 className="text-3xl sm:text-4xl font-black uppercase tracking-tight text-white">
-              Ropa & Merch de Entrenamiento
+              Productos Destacados
             </h2>
             <p className="text-sm sm:text-base text-zinc-400 max-w-xl">
-              Prendas de alta durabilidad en algodón peinado de alto gramaje. Diseñadas para soportar tus entrenamientos más duros con el mejor corte.
+              Artículos seleccionados con los más altos estándares de calidad y diseño contemporáneo.
             </p>
           </div>
           <Link
@@ -63,39 +60,39 @@ export function StorePreview() {
                       alt={product.title}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     />
-
                     {product.badge && (
-                      <span className="absolute top-4 left-4 px-3 py-1 rounded-full bg-zinc-900/90 backdrop-blur-md border border-zinc-700 text-amber-400 text-[11px] font-bold uppercase tracking-wider">
+                      <span className="absolute top-4 left-4 px-3 py-1 rounded-full bg-zinc-900/90 backdrop-blur-md border border-zinc-700 text-amber-400 text-xs font-bold uppercase tracking-wider">
                         {product.badge}
                       </span>
                     )}
                   </div>
 
-                  {/* Info */}
+                  {/* Información */}
                   <div className="p-6 space-y-4">
-                    <h3 className="text-lg font-black text-white group-hover:text-amber-400 transition-colors line-clamp-1">
-                      {product.title}
-                    </h3>
-                    <p className="text-xs sm:text-sm text-zinc-400 line-clamp-2">
-                      {product.description}
-                    </p>
+                    <div className="space-y-1">
+                      <h3 className="text-lg font-black text-white group-hover:text-amber-400 transition-colors line-clamp-1">
+                        {product.title}
+                      </h3>
+                      <p className="text-xs text-zinc-400 line-clamp-2">
+                        {product.description}
+                      </p>
+                    </div>
 
-                    {/* Selector de Tallas si aplica */}
+                    {/* Selector de opciones si tiene */}
                     {product.sizes && product.sizes.length > 0 && (
-                      <div className="space-y-1.5 pt-2">
+                      <div className="space-y-1.5 pt-1">
                         <span className="text-[11px] font-bold text-zinc-400 uppercase tracking-wider block">
-                          Talla seleccionada: {currentSize}
+                          Opción / Talla:
                         </span>
                         <div className="flex gap-2">
                           {product.sizes.map((size) => (
                             <button
                               key={size}
-                              type="button"
                               onClick={() => handleSizeChange(product.id, size)}
-                              className={`w-9 h-9 rounded-lg text-xs font-bold transition-all border ${
+                              className={`px-3 py-1 rounded-lg text-xs font-bold border transition-all ${
                                 currentSize === size
-                                  ? "bg-amber-400 text-zinc-950 border-amber-400 shadow-md"
-                                  : "bg-zinc-900 text-zinc-300 border-zinc-800 hover:border-zinc-700"
+                                  ? "bg-amber-400 text-zinc-950 border-amber-400 shadow-sm"
+                                  : "bg-zinc-900 text-zinc-400 border-zinc-800 hover:border-zinc-700"
                               }`}
                             >
                               {size}
@@ -107,31 +104,26 @@ export function StorePreview() {
                   </div>
                 </div>
 
-                {/* Precio y Añadir al Carrito */}
-                <div className="p-6 pt-0 mt-2">
-                  <div className="pt-4 border-t border-zinc-800 flex items-center justify-between">
-                    <div>
-                      <span className="text-[11px] uppercase tracking-wider text-zinc-500 block">
-                        Precio
+                {/* Footer de Tarjeta con Precios y Botón de Carrito */}
+                <div className="p-6 pt-0">
+                  <div className="flex items-center justify-between pt-4 border-t border-zinc-800/80">
+                    <div className="flex items-baseline gap-2">
+                      <span className="text-2xl font-black text-white">
+                        {siteConfig.currency.symbol}
+                        {product.price.toLocaleString(siteConfig.currency.locale)}
                       </span>
-                      <div className="flex items-baseline gap-2">
-                        <span className="text-2xl font-black text-white">
+                      {product.compareAtPrice && (
+                        <span className="text-xs text-zinc-500 line-through">
                           {siteConfig.currency.symbol}
-                          {product.price.toLocaleString(siteConfig.currency.locale)}
+                          {product.compareAtPrice.toLocaleString(siteConfig.currency.locale)}
                         </span>
-                        {product.compareAtPrice && (
-                          <span className="text-xs text-zinc-500 line-through">
-                            {siteConfig.currency.symbol}
-                            {product.compareAtPrice.toLocaleString(siteConfig.currency.locale)}
-                          </span>
-                        )}
-                      </div>
+                      )}
                     </div>
 
                     <button
                       onClick={() =>
                         addItem({
-                          id: `${product.id}-${currentSize}`,
+                          id: currentSize ? `${product.id}-${currentSize}` : product.id,
                           productId: product.id,
                           type: "physical",
                           title: product.title,
@@ -140,10 +132,10 @@ export function StorePreview() {
                           selectedSize: currentSize,
                         })
                       }
-                      className="px-4 py-2.5 rounded-xl bg-zinc-800 hover:bg-amber-400 hover:text-zinc-950 text-white font-bold text-xs uppercase tracking-wider transition-colors flex items-center gap-1.5 active:scale-95"
+                      className="p-3 rounded-xl bg-amber-400 hover:bg-amber-300 text-zinc-950 transition-colors shadow-md shadow-amber-400/20 active:scale-95"
+                      title="Agregar al carrito"
                     >
-                      <ShoppingBag className="w-4 h-4" />
-                      <span>Agregar</span>
+                      <ShoppingBag className="w-4 h-4 stroke-[2.5]" />
                     </button>
                   </div>
                 </div>

@@ -55,13 +55,13 @@ export default function AcademiaDashboard() {
             />
             <div>
               <span className="text-[11px] uppercase font-black tracking-widest text-amber-400">
-                Portal de Alumno Activo
+                Portal de Miembros
               </span>
               <h1 className="text-2xl sm:text-3xl font-black text-white">
                 ¡Hola, {user.name}!
               </h1>
               <p className="text-xs text-zinc-400">
-                {user.email} • Tienes {userCourses.length} programa(s) activo(s)
+                {user.email} • Tienes {userCourses.length} curso(s) activo(s)
               </p>
             </div>
           </div>
@@ -81,7 +81,7 @@ export default function AcademiaDashboard() {
           <div className="flex items-center justify-between">
             <h2 className="text-xl font-black uppercase tracking-tight text-white flex items-center gap-2">
               <BookOpen className="w-5 h-5 text-amber-400" />
-              Tus Programas de Entrenamiento
+              Tus Cursos & Programas
             </h2>
           </div>
 
@@ -90,7 +90,7 @@ export default function AcademiaDashboard() {
               <BookOpen className="w-12 h-12 text-zinc-600 mx-auto" />
               <h3 className="text-lg font-bold text-white">Aún no tienes cursos inscritos</h3>
               <p className="text-xs text-zinc-400 max-w-sm mx-auto">
-                Elige uno de nuestros programas de hipertrofia o definición para desbloquear tus clases en video de alta calidad.
+                Elige uno de nuestros programas para desbloquear tus clases en video y recursos prácticos.
               </p>
               <Link
                 href="/cursos"

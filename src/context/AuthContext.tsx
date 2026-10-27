@@ -16,19 +16,19 @@ interface AuthContextType {
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-// Usuario de demostración predeterminado (un alumno con el curso de hipertrofia activo)
+// Usuario de demostración predeterminado (un miembro activo de prueba)
 const DEFAULT_DEMO_STUDENT: User = {
-  id: "user-demo-123",
-  email: "alumno@demo.mx",
-  name: "Alejandro Ramírez",
+  id: "user-demo-01",
+  email: "demo@ejemplo.com",
+  name: "Usuario Demostración",
   avatarUrl: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=200&q=80",
   role: "student",
-  purchasedCourseIds: ["curso-hipertrofia-total"],
+  purchasedCourseIds: ["curso-estrategia-digital"],
   progress: {
-    "curso-hipertrofia-total": {
-      courseId: "curso-hipertrofia-total",
-      completedLessonIds: ["les-1-1", "les-1-2"],
-      lastAccessedLessonId: "les-1-3",
+    "curso-estrategia-digital": {
+      courseId: "curso-estrategia-digital",
+      completedLessonIds: ["les-1-1"],
+      lastAccessedLessonId: "les-1-2",
     },
   },
 };
@@ -39,13 +39,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     try {
-      const saved = localStorage.getItem("titan_user");
+      const saved = localStorage.getItem("app_user");
       if (saved) {
         setUser(JSON.parse(saved));
       } else {
-        // Inicializar con el usuario demo para facilitar la prueba
         setUser(DEFAULT_DEMO_STUDENT);
-        localStorage.setItem("titan_user", JSON.stringify(DEFAULT_DEMO_STUDENT));
+        localStorage.setItem("app_user", JSON.stringify(DEFAULT_DEMO_STUDENT));
       }
     } catch {
       setUser(DEFAULT_DEMO_STUDENT);
@@ -57,9 +56,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const saveUser = (updatedUser: User | null) => {
     setUser(updatedUser);
     if (updatedUser) {
-      localStorage.setItem("titan_user", JSON.stringify(updatedUser));
+      localStorage.setItem("app_user", JSON.stringify(updatedUser));
     } else {
-      localStorage.removeItem("titan_user");
+      localStorage.removeItem("app_user");
     }
   };
 
@@ -67,12 +66,15 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     const newUser: User = {
       id: `user-${Date.now()}`,
       email,
-      name: email.split("@")[0] || "Atleta Titan",
+      name: email.split("@")[0] || "Miembro Demo",
       role,
-      purchasedCourseIds: role === "admin" ? ["curso-hipertrofia-total", "curso-definicion-extrema", "curso-fuerza-bruta"] : ["curso-hipertrofia-total"],
+      purchasedCourseIds:
+        role === "admin"
+          ? ["curso-estrategia-digital", "curso-diseno-experiencia"]
+          : ["curso-estrategia-digital"],
       progress: {
-        "curso-hipertrofia-total": {
-          courseId: "curso-hipertrofia-total",
+        "curso-estrategia-digital": {
+          courseId: "curso-estrategia-digital",
           completedLessonIds: ["les-1-1"],
         },
       },

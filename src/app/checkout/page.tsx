@@ -58,9 +58,9 @@ export default function CheckoutPage() {
         date: new Date().toLocaleDateString("es-MX"),
       };
       try {
-        const pastOrders = JSON.parse(localStorage.getItem("titan_orders") || "[]");
+        const pastOrders = JSON.parse(localStorage.getItem("app_orders") || "[]");
         pastOrders.unshift(order);
-        localStorage.setItem("titan_orders", JSON.stringify(pastOrders));
+        localStorage.setItem("app_orders", JSON.stringify(pastOrders));
       } catch {}
 
       clearCart();
@@ -377,7 +377,7 @@ export default function CheckoutPage() {
               </button>
 
               <p className="text-[10px] text-zinc-500 text-center leading-normal">
-                Al confirmar tu compra aceptas los términos y condiciones de Titan Athletics. Los cursos se desbloquean inmediatamente tras procesar el cobro.
+                Al confirmar tu compra aceptas los términos y condiciones de {siteConfig.name}. Los accesos digitales se habilitan inmediatamente tras procesar el pago.
               </p>
             </div>
           </div>

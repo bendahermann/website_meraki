@@ -1,72 +1,167 @@
-# TITAN ATHLETICS — Plataforma Modular para Entrenadores y Creadores Fitness
+# 🌐 SITIO BASE — Boilerplate Modular & E-Commerce Starter (HBData)
 
-Esta plataforma fue desarrollada bajo una **arquitectura modular "marca blanca" (white-label)** lista para escalarse y replicarse para múltiples entrenadores, gimnasios o nutriólogos en México.
+> **Plantilla base estándar, modular y moderna para la creación acelerada de sitios web de alto impacto, catálogos de productos y academias digitales.**
+
+Diseñada bajo una arquitectura **marca blanca (white-label)** totalmente parametrizada. Con esta base puedes desplegar rápidamente sitios web para cualquier cliente o proyecto futuro (por ejemplo, *Meraki*, marcas de retail, servicios profesionales o plataformas educativas) simplemente configurando un solo archivo central.
 
 ---
 
-## 🚀 Cómo Iniciar el Proyecto Localmente
+## ⚡ Stack Tecnológico
+
+- **Framework:** [Next.js](https://nextjs.org/) (App Router con React Server Components & Turbopack)
+- **Biblioteca UI:** [React](https://react.dev/) 19
+- **Tipado:** [TypeScript](https://www.typescriptlang.org/)
+- **Estilos:** [Tailwind CSS](https://tailwindcss.com/) v4
+- **Iconografía:** [Lucide React](https://lucide.dev/)
+- **Estado Global:** Context API (`CartContext` y `AuthContext` reactivos con persistencia en `localStorage`)
+
+---
+
+## 🚀 Inicio Rápido (Creación de un Nuevo Proyecto)
+
+### 1. Duplica o clona la carpeta base
+Copia la carpeta `website` en el directorio de tu nuevo proyecto (por ejemplo, `Meraki\website`):
 
 ```bash
-cd website
+# Ejemplo:
+cp -r website MiNuevoProyecto/website
+cd MiNuevoProyecto/website
+```
+
+### 2. Ejecuta el script de configuración automática
+```bash
+npm run setup
+```
+> *Este comando genera automáticamente tu `.env.local` a partir de `.env.example` si no existe.*
+
+### 3. Instala las dependencias y corre el servidor local
+```bash
+npm install
 npm run dev
 ```
-Abre en tu navegador: [http://localhost:3000](http://localhost:3000)
+
+Abre en tu navegador: **[http://localhost:3000](http://localhost:3000)**
 
 ---
 
-## 🛠️ Arquitectura Modular (Conecta y Desconecta Módulos)
+## 🛠️ Personalización en 1 Solo Archivo
 
-Todo el comportamiento de la plataforma se controla desde un solo archivo:  
-📁 `src/config/site.ts`
+Toda la identidad, enlaces, textos y módulos activos se controlan centralmente desde:  
+📁 **`src/config/site.ts`**
 
 ```typescript
 export const siteConfig = {
-  name: "TITAN ATHLETICS",
-  trainerName: "Hermann Benda",
-  currency: { code: "MXN", symbol: "$" },
-  // INTERRUPTORES DE FUNCIONALIDADES
+  name: "NOMBRE DE TU MARCA",
+  shortName: "Marca",
+  tagline: "Propuesta de valor o slogan",
+  description: "Descripción general para SEO y presentación",
+  currency: {
+    code: "MXN",
+    symbol: "$",
+    locale: "es-MX",
+  },
+  contact: {
+    email: "contacto@tudominio.com",
+    whatsapp: "+52 55 1234 5678",
+    location: "Ciudad de México, México",
+    instagram: "https://instagram.com/...",
+    // ...
+  },
+  // INTERRUPTORES DE FUNCIONALIDADES MODULARES
   features: {
-    store: true,        // Tienda de ropa y merchandising físico
-    courses: true,      // Cursos en video y academia de alumnos
-    coaching: true,     // Asesorías personalizadas 1 a 1 (WhatsApp)
-    cart: true,         // Carrito de compras unificado
-    auth: true,         // Inicio de sesión y tracking de lecciones
-    testimonials: true, // Casos de éxito y transformaciones
-    newsletter: true,   // Descarga de guía en PDF (captación de correos)
-    admin: true,        // Panel de control
-  }
+    store: true,        // Catálogo de productos físicos y variantes
+    courses: true,      // Academia digital, lecciones y reproductor
+    services: true,     // Botones de cotización o asesoría 1 a 1
+    cart: true,         // Carrito de compras reactivo lateral
+    auth: true,         // Sistema de login de usuarios/alumnos
+    testimonials: true, // Sección de reseñas y casos de éxito
+    newsletter: true,   // Formulario de suscripción / Lead magnet
+    admin: true,        // Panel de control administrativo demo
+  },
 };
 ```
-*Si cambias `store: false`, la tienda y todos sus botones desaparecerán de la web sin romper nada.*
+
+> **Ventaja Modular:** Si un cliente solo necesita catálogo físico y no cursos, simplemente cambia `courses: false` y todas las referencias, botones y rutas relacionadas se ocultan limpiamente de la navegación.
 
 ---
 
-## 📦 Rutas y Funcionalidades Incluidas
+## 📁 Estructura del Proyecto
+
+```text
+website/
+├── public/                # Favicon e imágenes estáticas públicas
+├── scripts/
+│   └── setup.js           # Script de inicialización de nuevos proyectos
+├── src/
+│   ├── app/               # Next.js App Router (Páginas y Rutas)
+│   │   ├── academia/      # Dashboard del usuario / LMS
+│   │   ├── admin/         # Panel de control administrativo
+│   │   ├── checkout/      # Pasarela de pago y orden simulada
+│   │   ├── cursos/        # Catálogo de cursos / servicios
+│   │   ├── login/         # Pantalla de acceso demo y login
+│   │   ├── tienda/        # Catálogo e-commerce de productos
+│   │   ├── globals.css    # Importaciones de Tailwind CSS v4
+│   │   ├── layout.tsx     # Layout raíz con Providers, Navbar y Footer
+│   │   └── page.tsx       # Landing Page principal
+│   ├── components/        # Componentes UI reutilizables
+│   │   ├── cart/          # Drawer reactivo del carrito
+│   │   ├── course/        # Reproductor de video protegido
+│   │   ├── home/          # Secciones modulares de la landing (Hero, About, etc.)
+│   │   └── layout/        # Navbar y Footer dinámicos
+│   ├── config/
+│   │   └── site.ts        # Configuración maestra parametrizada
+│   ├── context/
+│   │   ├── AuthContext.tsx# Estado de usuario autenticado
+│   │   └── CartContext.tsx# Carrito de compras unificado
+│   ├── data/
+│   │   └── mockData.ts    # Datos de demostración (productos, cursos, reseñas)
+│   └── types/
+│       └── index.ts       # Definiciones de TypeScript
+├── .env.example           # Plantilla de variables de entorno
+├── package.json           # Dependencias y scripts
+├── tsconfig.json          # Configuración de TypeScript
+└── README.md              # Documentación de la plantilla base
+```
+
+---
+
+## 📦 Páginas y Funcionalidades Disponibles
 
 | Ruta | Descripción |
 | :--- | :--- |
-| `/` | **Landing Page de Alto Impacto:** Hero, métricas, cursos, ropa, bio del coach, testimonios y lead magnet. |
-| `/cursos` | **Catálogo de Cursos:** Filtros por nivel (Principiante, Intermedio, Avanzado) e inscripción. |
-| `/tienda` | **E-commerce de Ropa:** Ropa deportiva, hoodies, shakers, selector de tallas y carrito reactivo. |
-| `/checkout` | **Pasarela de Pago Unificada:** Permite comprar ropa (con envío en México) y cursos en una sola orden. |
-| `/academia` | **Área de Alumnos (LMS):** Dashboard personal, barra de porcentaje de progreso y acceso a cursos. |
-| `/academia/curso/[slug]` | **Reproductor Protegido:** Videos protegidos contra clic derecho, sin botón de descarga y con marca de agua dinámica con el correo del alumno. |
-| `/login` | **Autenticación con 1 Clic:** Acceso rápido demo como Alumno o como Administrador. |
-| `/admin` | **Panel de Control:** KPIs de ventas en MXN, pedidos pendientes, gestión de cursos y control de interruptores modulares. |
+| `/` | **Landing Page:** Hero visual, barra de métricas, productos destacados, cursos en video, historia/quiénes somos, testimonios y newsletter. |
+| `/tienda` | **Catálogo E-commerce:** Filtro por categorías, selector de variantes/tallas y botón de añadir al carrito. |
+| `/cursos` | **Academia Digital:** Listado de programas con desglose de lecciones, nivel y requisitos. |
+| `/checkout` | **Checkout Unificado:** Permite procesar productos físicos y accesos digitales en una sola orden con cálculo de envíos. |
+| `/academia` | **Portal de Miembros:** Barra de avance porcentual y acceso a contenidos adquiridos. |
+| `/academia/curso/[slug]` | **Reproductor Protegido:** Reproductor con bloqueo de descarga, marca de agua dinámica con el email del usuario y seguimiento de lecciones completadas. |
+| `/login` | **Login Rápido:** Acceso demo en 1 clic como Miembro o como Administrador. |
+| `/admin` | **Panel de Control:** KPIs de ventas, gestión de pedidos demo y switches para activar/desactivar módulos en tiempo real. |
 
 ---
 
-## 🛡️ Medidas de Protección de Video
+## 🧪 Verificación y Calidad de Código
 
-1. **Bloqueo de Clic Derecho:** Se desactiva la opción de inspeccionar o guardar el video.
-2. **Atributo `nodownload`:** Se elimina el botón de descarga del reproductor nativo.
-3. **Marca de Agua Dinámica:** Se estampa el correo electrónico del alumno en pantalla, disuadiendo la grabación de pantalla para piratería.
-4. **Verificación de Compra:** Solo alumnos con la compra registrada tienen acceso al reproductor.
+Antes de subir cambios o entregar a un cliente, puedes verificar la integridad de la base:
+
+```bash
+# Validar tipado TypeScript sin emitir código
+npm run type-check
+
+# Compilar para producción y validar páginas estáticas
+npm run build
+```
 
 ---
 
-## 💳 Despliegue en Producción (Costo \$0 inicial)
+## ☁️ Despliegue en Producción
 
-1. Sube este repositorio a **GitHub**.
-2. Conéctalo a **Vercel** (despliegue gratuito en 1 clic).
-3. Conecta **Stripe México** o **Mercado Pago** para cobros automáticos.
+Esta plantilla está optimizada para desplegarse con costo $0 en plataformas modernas:
+
+1. **Vercel:** Conecta tu repositorio de GitHub y selecciona el framework *Next.js*. Despliegue automático en 1 minuto.
+2. **Netlify:** Compatible con el adapter oficial de Next.js.
+3. **Docker / VPS propio:** Soporta el comando nativo `npm run build` y `npm start`.
+
+---
+
+© 2026 HBData. Plantilla base para desarrollo de sitios web.

@@ -25,21 +25,21 @@ export function LeadMagnet() {
 
           <div className="relative z-10 space-y-4 max-w-xl mx-auto">
             <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-400/10 border border-amber-400/20 text-amber-400 text-xs font-black uppercase tracking-wider">
-              <Sparkles className="w-3.5 h-3.5" /> Recurso 100% Gratuito
+              <Sparkles className="w-3.5 h-3.5" /> Comunidad Exclusiva
             </span>
 
             <h2 className="text-2xl sm:text-3xl font-black uppercase tracking-tight text-white">
-              Descarga la Guía de Rutinas & Nutrición para Hipertrofia
+              Suscríbete y Recibe Contenido Exclusivo
             </h2>
 
             <p className="text-xs sm:text-sm text-zinc-400">
-              Aprende a estructurar tus series, repeticiones y descansos sin costo. Más de 20 páginas de puro contenido práctico.
+              Mantente al día con nuestras últimas novedades, lanzamientos y beneficios especiales directo en tu bandeja de entrada.
             </p>
 
             {submitted ? (
               <div className="p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-sm font-bold flex items-center justify-center gap-2">
                 <CheckCircle className="w-5 h-5" />
-                <span>¡Guía enviada con éxito! Revisa tu bandeja de entrada en los próximos minutos.</span>
+                <span>¡Suscripción exitosa! Te hemos enviado un correo de bienvenida.</span>
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 pt-4">
@@ -59,13 +59,13 @@ export function LeadMagnet() {
                   className="px-6 py-3.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-zinc-950 font-black text-xs uppercase tracking-wider transition-colors flex items-center justify-center gap-2 shadow-lg shadow-amber-400/20 active:scale-95"
                 >
                   <Download className="w-4 h-4" />
-                  <span>Obtener Guía PDF</span>
+                  <span>Suscribirme</span>
                 </button>
               </form>
             )}
 
             <p className="text-[11px] text-zinc-500 pt-1">
-              Cero spam. Solo consejos de entrenamiento y ofertas exclusivas de la comunidad.
+              Sin spam. Puedes cancelar tu suscripción en cualquier momento con un solo clic.
             </p>
           </div>
         </div>

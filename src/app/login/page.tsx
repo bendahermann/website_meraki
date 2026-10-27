@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
-import { User, Shield, ArrowRight, Dumbbell } from "lucide-react";
+import { User, Shield, ArrowRight, Sparkles } from "lucide-react";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -18,12 +18,12 @@ export default function LoginPage() {
   };
 
   const handleDemoStudent = () => {
-    login("alumno@demo.mx", "student");
+    login("usuario@demo.mx", "student");
     router.push("/academia");
   };
 
   const handleDemoAdmin = () => {
-    login("admin@titanathletics.mx", "admin");
+    login("admin@ejemplo.com", "admin");
     router.push("/admin");
   };
 
@@ -32,13 +32,13 @@ export default function LoginPage() {
       <div className="max-w-md w-full p-8 rounded-3xl bg-zinc-900 border border-zinc-800 space-y-6 shadow-2xl">
         <div className="text-center space-y-2">
           <div className="w-12 h-12 rounded-2xl bg-amber-400 text-zinc-950 mx-auto flex items-center justify-center shadow-lg shadow-amber-400/20">
-            <Dumbbell className="w-6 h-6" />
+            <Sparkles className="w-6 h-6 stroke-[2.5]" />
           </div>
           <h1 className="text-2xl font-black uppercase text-white">
-            Área de Alumnos
+            Portal de Miembros
           </h1>
           <p className="text-xs text-zinc-400">
-            Ingresa para acceder a tus cursos de entrenamiento y continuar tus lecciones.
+            Ingresa para acceder a tus contenidos exclusivos y gestionar tus accesos.
           </p>
         </div>
 
@@ -53,7 +53,7 @@ export default function LoginPage() {
           >
             <div className="flex items-center gap-2">
               <User className="w-4 h-4 text-amber-400" />
-              <span>Entrar como Alumno (Alejandro)</span>
+              <span>Entrar como Miembro / Alumno Demo</span>
             </div>
             <ArrowRight className="w-3.5 h-3.5 text-zinc-400" />
           </button>
@@ -64,7 +64,7 @@ export default function LoginPage() {
           >
             <div className="flex items-center gap-2">
               <Shield className="w-4 h-4 text-indigo-400" />
-              <span>Entrar como Administrador (Coach)</span>
+              <span>Entrar como Administrador Staff</span>
             </div>
             <ArrowRight className="w-3.5 h-3.5 text-zinc-400" />
           </button>
@@ -77,10 +77,9 @@ export default function LoginPage() {
           </span>
         </div>
 
-        {/* Formulario Estándar */}
         <form onSubmit={handleCustomLogin} className="space-y-4">
           <div>
-            <label className="text-xs text-zinc-400 block mb-1">
+            <label className="text-xs font-bold text-zinc-400 block mb-1">
               Correo Electrónico
             </label>
             <input
@@ -89,15 +88,15 @@ export default function LoginPage() {
               placeholder="tu@correo.com"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full px-3.5 py-2.5 rounded-xl bg-zinc-950 border border-zinc-700 text-white placeholder-zinc-500 text-sm focus:outline-none focus:border-amber-400"
+              className="w-full px-4 py-3 rounded-xl bg-zinc-950 border border-zinc-700 text-white placeholder-zinc-500 text-sm focus:outline-none focus:border-amber-400"
             />
           </div>
 
           <button
             type="submit"
-            className="w-full py-3.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-zinc-950 font-black text-xs uppercase tracking-wider transition-colors shadow-lg shadow-amber-400/20"
+            className="w-full py-3.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-zinc-950 font-black text-xs uppercase tracking-wider transition-colors shadow-lg shadow-amber-400/20 active:scale-95"
           >
-            Ingresar a la Plataforma
+            Continuar
           </button>
         </form>
       </div>
