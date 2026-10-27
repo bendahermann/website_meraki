@@ -134,9 +134,15 @@ export function Footer() {
 
         {/* Barra inferior */}
         <div className="mt-12 pt-8 border-t border-zinc-900 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-zinc-500">
-          <p>
-            © {new Date().getFullYear()} {siteConfig.name}. Todos los derechos reservados.
-          </p>
+          <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-4 text-center sm:text-left">
+            <p>
+              © {new Date().getFullYear()} {siteConfig.name}. Todos los derechos reservados.
+            </p>
+            <span className="hidden sm:inline text-zinc-700">•</span>
+            <p className="text-zinc-400 font-medium">
+              Powered by <span className="text-zinc-200 font-bold hover:text-amber-400 transition-colors">BCSmartData</span>
+            </p>
+          </div>
           <div className="flex items-center gap-6">
             <span className="text-zinc-600">
               Precios en Moneda ({siteConfig.currency.code})
